@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1759393761027,
+    "userId": 1759392573504,
+    "username": "wira",
+    "receiverName": "wira",
+    "deliveryAddress": "afds",
+    "contactPhone": "0812393913800",
+    "contactEmail": "wira@gmail.com",
+    "deliveryProvince": "DKI Jakarta",
+    "deliveryCity": "aefrg",
+    "deliveryDistrict": "dgshafgrs",
+    "notes": "adfs",
+    "items": [
+      {
+        "itemId": 2,
+        "name": "Bibit Kopi Robusta 20 batang",
+        "price": 400000,
+        "quantity": 1,
+        "category": "bibit"
+      },
+      {
+        "itemId": 3,
+        "name": "Pupuk Urea 50kg",
+        "price": 350000,
+        "quantity": 1,
+        "category": "pupuk"
+      }
+    ],
+    "totalAmount": 750000,
+    "status": "pending",
+    "paymentMethod": "COD",
+    "createdAt": "2025-10-02T08:29:21.027Z"
+  }
+]

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taniku - Admin Panel</title>
+  <meta name="description" content="Dashboard Admin Toko Pertanian Taniku untuk mengelola produk, pesanan COD, dan pengguna.">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css"> 
+</head>
+<body>
+
+  <header class="header">
+    <nav class="navbar">
+      <a href="/" class="logo">
+        <i class="fas fa-seedling"></i> Taniku - Admin
+      </a>
+      <div class="nav-menu">
+        <div class="flex-center gap-1">
+          <p class="welcome-text hidden" id="userWelcomeText">Halo, Admin!</p>
+          <button class="btn btn-danger" id="logoutBtn" aria-label="Keluar dari akun admin">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div id="alertContainer"></div>
+
+    <section id="adminPanel" class="section mt-2">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-cogs"></i> Dashboard Administrasi
+        </h2>
+        <div class="flex gap-1">
+                    <button class="btn btn-secondary" id="adminOrdersBtn">
+            <i class="fas fa-truck-moving"></i> Kelola Pesanan COD
+          </button>
+          <button class="btn btn-primary" id="adminItemsBtn">
+            <i class="fas fa-box"></i> Kelola Produk
+          </button>
+        </div>
+      </div>
+            <div id="adminContent" class="p-4 bg-white shadow-md rounded-lg mt-3">
+            <p class="text-center muted">
+          Selamat datang di Panel Admin Taniku. Memuat data... 
+        </p>
+      </div>
+    </section>
+
+        <div id="orderDetailModal" class="modal modal-backdrop">
+      <div class="modal-content modal-large">
+        <div class="modal-header">
+          <h2 class="modal-title">Detail Pesanan</h2>
+          <span class="close" id="closeOrderDetailModalBtn" aria-label="Tutup detail pesanan">&times;</span>
+        </div>
+        <div class="modal-body" id="orderDetailContent">
+                    </div>
+      </div>
+    </div>
+
+        <div id="itemModal" class="modal modal-backdrop">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="itemModalTitle">
+            <i class="fas fa-box-open"></i> Kelola Produk
+          </h2>
+          <span class="close" id="closeItemModalBtn" aria-label="Tutup formulir produk">&times;</span>
+        </div>
+        <form class="form" id="itemForm" onsubmit="window.saveItem(event)">
+          <input type="hidden" id="itemId">
+          
+<div class="form-group">
+  <label class="form-label" for="itemCategory">Kategori Produk</label>
+  <select id="itemCategory" class="form-input form-select" required>
+    <option value="" disabled selected>Pilih Kategori</option>
+    <option value="benih">Benih & Bibit</option>
+    <option value="pupuk">Pupuk</option>
+    <option value="pestisida">Pestisida</option>
+    <option value="alat">Alat Pertanian</option>
+  </select>
+</div>
+
+          
+          <div class="form-group">
+            <label class="form-label" for="itemName">Nama Produk</label>
+            <input type="text" id="itemName" class="form-input" placeholder="e.g., Benih Padi Hibrida F1" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="itemPrice">Harga (Rp)</label>
+            <input type="number" id="itemPrice" class="form-input" placeholder="e.g., 65000" min="0" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="itemDescription">Deskripsi Produk</label>
+            <textarea id="itemDescription" class="form-input form-textarea" placeholder="Detail fungsi, dosis, dan cara pakai..." required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="itemImage">URL Gambar Produk</label>
+            <input type="url" id="itemImage" class="form-input" placeholder="https://placehold.co/300x200?text=PRODUK">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="itemOriginalPrice">Harga Asli (Untuk Diskon, Opsional)</label>
+            <input type="number" id="itemOriginalPrice" class="form-input" placeholder="Harga normal (e.g., 75000)" min="0">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="itemBadge">Lencana (Opsional)</label>
+            <input type="text" id="itemBadge" class="form-input" placeholder="e.g., LARIS, DISKON">
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-100 mt-2" id="saveItemBtn">
+            <i class="fas fa-save"></i> Simpan Produk
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      &copy; 2025 Taniku. All Rights Reserved.
+    </div>
+  </footer>
+  
+  <div id="loadingSpinner" class="loading-overlay" style="display: none;">
+      <div class="spinner"></div>
+  </div>
+
+<script src="js/app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const ordersBtn = document.getElementById('adminOrdersBtn');
+        const itemsBtn = document.getElementById('adminItemsBtn');
+
+        // Fungsi ini dipindahkan ke app.js (showAdminOrders dan showAdminItems) untuk konsistensi
+        // function setActiveButton(activeId) {
+        //     ordersBtn?.classList.remove('active-tab');
+        //     itemsBtn?.classList.remove('active-tab');
+        //     document.getElementById(activeId)?.classList.add('active-tab');
+        // }
+
+        ordersBtn?.addEventListener('click', () => {
+            window.showAdminOrders();
+        });
+
+        itemsBtn?.addEventListener('click', () => {
+            window.showAdminItems();
+        });
+    });
+</script>
+</body>
+</html>

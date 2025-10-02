@@ -1,0 +1,23 @@
+{
+  "name": "majevstorefs-backend",
+  "version": "1.0.0",
+  "description": "Backend server for MajevStoreFS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^4.19.2",
+    "express-session": "^1.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "pdfkit": "^0.17.2",
+    "uuid": "^13.0.0"
+  }
+}

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taniku - Toko Pertanian | Pesan Sekarang, Bayar di Tempat</title>
+    <meta name="description" content="Pesan benih, pupuk, dan alat tani secara online. Bayar di tempat (COD) saat barang sampai. Pengiriman cepat untuk petani sukses!" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#home" class="logo">
+                <img src="https://png.pngtree.com/element_our/sm/20180411/sm_5ace0760cdfe8.jpg" alt="Taniku Logo" class="logo-img">
+                Taniku
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Produk Tani</a></li>
+                    <li><a href="#consultation">Konsultasi</a></li>
+                    <li><a href="#about" onclick="window.showAbout()">Tentang Kami</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+                
+                <div id="authButtons" class="flex gap-1">
+                    <button class="btn btn-secondary" id="loginBtn" data-show-modal="loginModal">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="btn btn-primary" id="registerBtn" data-show-modal="registerModal">
+                        <i class="fas fa-user-plus"></i> Daftar
+                    </button>
+                </div>
+                
+<div id="userButtons" class="d-flex flex-wrap gap-2 align-items-center">
+    <!-- Profil -->
+    <button 
+        id="userDashboardBtn" 
+        class="btn btn-light border rounded-pill shadow-sm d-flex align-items-center gap-2 px-3"
+    >
+        <i class="fas fa-user text-primary"></i> 
+        <span>Profil (<span id="userNameMini"></span>)</span>
+    </button>
+
+    <!-- Keranjang -->
+    <button 
+        id="cartBtn" 
+        class="btn btn-light border rounded-pill shadow-sm d-flex align-items-center gap-2 px-3 position-relative"
+    >
+        <i class="fas fa-shopping-basket text-success"></i> 
+        <span>Keranjang</span>
+        <span 
+            id="cartItemCount" 
+            class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill"
+        >0</span>
+    </button>
+
+    <!-- Logout -->
+    <button 
+        id="logoutBtn" 
+        class="btn btn-danger rounded-pill shadow-sm d-flex align-items-center gap-2 px-3"
+    >
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+</div>
+
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div id="alertContainer"></div> 
+        
+        <section class="hero" id="home">
+            <div class="hero-banner">
+                <img src="https://png.pngtree.com/background/20230519/original/pngtree-picture-of-green-rice-fields-and-mountains-picture-image_2666006.jpg" alt="Banner Toko Pertanian Taniku" />
+            </div>
+            <h1>🌿 Panen Lebih Melimpah, Bertani Lebih Mudah</h1>
+            <p>Dapatkan benih unggul, pupuk terbaik, dan alat pertanian modern dengan harga bersahabat. Kami bantu petani Indonesia sukses!</p>
+            <div class="hero-actions">
+                <a href="#products" class="btn btn-primary btn-lg" onclick="window.scrollToProducts()">
+                    <i class="fas fa-seedling"></i> Belanja Produk Tani
+                </a>
+                <a href="#consultation" class="btn btn-outline btn-lg">
+                    <i class="fas fa-comments"></i> Konsultasi Masalah
+                </a>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalUsers">5,000+</div>
+                <div class="stat-label">Petani Mitra</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalItems">100+</div>
+                <div class="stat-label">Jenis Produk</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalOrders">15,000+</div>
+                <div class="stat-label">Order Terkirim</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="avgDelivery">1 Hari</div>
+                <div class="stat-label">Pengiriman Rata-rata</div>
+            </div>
+        </section>
+        
+    <section class="section" id="products">
+    <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-box-open"></i> Katalog Produk Tani Unggulan</h2>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-tabs">
+            <button class="filter-tab active" id="filterAllBtn" onclick="filterItems('all')">
+                <i class="fas fa-th-large"></i> Semua Produk
+            </button>
+            <button class="filter-tab" id="filterBenihBtn" onclick="filterItems('benih')">
+                <i class="fas fa-leaf"></i> Benih & Bibit
+            </button>
+            <button class="filter-tab" id="filterPupukBtn" onclick="filterItems('pupuk')">
+                <i class="fas fa-vial"></i> Pupuk
+            </button>
+            <button class="filter-tab" id="filterPestisidaBtn" onclick="filterItems('pestisida')">
+                <i class="fas fa-bug"></i> Pestisida
+            </button>
+            <button class="filter-tab" id="filterAlatBtn" onclick="filterItems('alat')">
+                <i class="fas fa-toolbox"></i> Alat Tani
+            </button>
+        </div>
+
+        <select class="sort-select" id="sortItemsSelect">
+            <option value="">Urutkan Berdasarkan</option>
+            <option value="price_low">Harga: Termurah</option>
+            <option value="price_high">Harga: Termahal</option>
+            <option value="popularity">Populer</option>
+        </select>
+    </div>
+
+    <div class="items-grid" id="itemsGrid">
+        <!-- Produk akan ditampilkan di sini -->
+    </div>
+</section>
+
+
+        <section class="section" id="consultation">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-tractor"></i> Konsultasi Tani Gratis</h2>
+            </div>
+            <p class="text-center mb-3">Punya masalah hama, penyakit, atau ingin optimasi panen? Hubungi tim ahli kami!</p>
+            <div class="consultation-actions flex-center">
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-success btn-lg">
+                    <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+                </a>
+                <a href="mailto:konsultasi@taniku.com" class="btn btn-secondary btn-lg ml-2">
+                    <i class="fas fa-envelope"></i> Kirim Email
+                </a>
+            </div>
+        </section>
+        
+        <section class="section" id="about" style="display: none;"></section>
+        <section class="section" id="contact" style="display: none;"></section>
+    </div>
+    
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex-between mb-2">
+                <h2 class="modal-title"><i class="fas fa-sign-in-alt"></i> Selamat Datang Kembali</h2>
+                <span class="close" id="closeLoginModalBtn" data-close-modal="loginModal">&times;</span>
+            </div>
+            <form class="form flex flex-col" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="Masukkan email Anda" required />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Masukkan password Anda" required />
+                    <p class="error-message"></p>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-sign-in-alt"></i> Login ke Akun
+                </button>
+                <div class="text-center mt-2">
+                    <span class="muted">Belum punya akun?</span>
+                    <a href="#" id="toRegisterLink" data-hide-modal="loginModal" data-show-modal="registerModal" class="link-accent">Daftar di sini</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex-between mb-2">
+                <h2 class="modal-title"><i class="fas fa-user-plus"></i> Gabung dengan Taniku</h2>
+                <span class="close" id="closeRegisterModalBtn" data-close-modal="registerModal">&times;</span>
+            </div>
+            <form class="form flex flex-col" id="registerForm">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="registerUsername" class="form-input" placeholder="Pilih Username" required />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="registerEmail" class="form-input" placeholder="Masukkan email Anda" required />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="registerPassword" class="form-input" placeholder="Buat password yang kuat" required />
+                    <p class="error-message"></p>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-user-plus"></i> Buat Akun
+                </button>
+                <div class="text-center mt-2">
+                    <span class="muted">Sudah punya akun?</span>
+                    <a href="#" id="toLoginLink" data-hide-modal="registerModal" data-show-modal="loginModal" class="link-accent">Login di sini</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+<div id="profileModal" class="modal">
+    <div class="modal-content large-modal"> 
+        <div class="modal-header flex-between mb-3" style="border-bottom: 2px solid var(--color-primary); padding-bottom: 10px;">
+            <h2 class="modal-title" style="color: var(--color-primary); margin: 0;">
+                <i class="fas fa-user-circle"></i> Dasbor Akun Anda
+            </h2>
+            <span class="close" id="closeProfileModalBtn" data-close-modal="profileModal" style="font-size: 1.8rem; line-height: 1;">&times;</span>
+        </div>
+        
+        <div class="user-card" style="display: flex; align-items: center; padding: 20px; border: 1px solid #ddd; border-left: 5px solid var(--color-success); border-radius: 10px; background-color: #f9fff9; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 30px;">
+            
+            <div class="user-avatar" id="userAvatar" 
+                style="width: 60px; height: 60px; border-radius: 50%; background-color: var(--color-success); color: white; 
+                       display: flex; justify-content: center; align-items: center; 
+                       font-size: 24px; font-weight: bold; margin-right: 20px; 
+                       box-shadow: 0 0 0 3px #e0ffe0; line-height: 1;"> 
+                       </div>
+            
+            <div class="user-info" style="flex-grow: 1;">
+                <h3 id="userName" style="font-size: 1.4rem; margin: 0 0 2px; color: #333; font-weight: bold;"></h3>
+                <p id="userEmail" style="font-size: 0.95rem; margin: 0; color: #555;">Status: <strong style="color: var(--color-success);">Aktif</strong></p>
+            </div>
+            
+            <button class="btn btn-warning btn-sm" id="editProfileBtn" 
+                style="padding: 10px 15px; font-size: 0.9rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <i class="fas fa-edit"></i> Edit Profil
+            </button>
+        </div>
+        
+        <div id="ordersContainer">
+            <p class="text-center muted" style="padding: 15px; border: 1px dashed #ccc; border-radius: 5px;">Memuat pesanan...</p>
+        </div>
+    </div>
+</div>
+
+    <div id="profileEditModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex-between mb-2">
+                <h2 class="modal-title"><i class="fas fa-edit"></i> Edit Data Akun</h2>
+                <span class="close" id="closeProfileEditModalBtn" data-close-modal="profileEditModal">&times;</span>
+            </div>
+            <form class="form flex flex-col" id="profileEditForm">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="editUsername" class="form-input" required />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="editEmail" class="form-input" required />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password Baru (Kosongkan jika tidak ingin diubah)</label>
+                    <input type="password" id="editNewPassword" class="form-input" placeholder="Minimal 6 karakter" />
+                    <p class="error-message"></p>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-2">
+                    <i class="fas fa-save"></i> Simpan Perubahan
+                </button>
+            </form>
+        </div>
+    </div>
+
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header flex-between mb-2">
+            <h2 class="modal-title"><i class="fas fa-shopping-basket"></i> Keranjang Belanja Anda</h2>
+            <span class="close" id="closeCartModalBtn" data-close-modal="cartModal">&times;</span>
+        </div>
+        <div id="cartItemsContainer" class="mb-2">
+        </div>
+        <div id="cartSummary" class="text-right border-top pt-2">
+            <p class="cart-total">Total: <span id="cartTotal">Rp 0</span></p>
+        </div>
+        
+        <form id="checkoutForm" class="form flex flex-col mt-2">
+            
+            <fieldset class="form-section">
+                <legend class="modal-subtitle">
+                    <i class="fas fa-user-check"></i> Data Pemesan
+                </legend>
+                <div class="form-group">
+                    <label class="form-label">Nama Lengkap Penerima</label>
+                    <input type="text" id="receiverNameInput" class="form-input" placeholder="Nama lengkap penerima barang" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nomor HP Aktif (WA)</label>
+                    <input type="tel" id="phoneInput" class="form-input" placeholder="Contoh: 081234567890 " required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="emailInput" class="form-input" placeholder="Contoh: nama.anda@email.com" required />
+                </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+                <legend class="modal-subtitle">
+                    <i class="fas fa-map-marker-alt"></i> Detail Alamat Pengiriman
+                </legend>
+                <div class="form-group">
+                    <label class="form-label" for="provinceSelect">Provinsi</label>
+                    <select id="provinceSelect" class="form-select" required>
+                        <option value="" disabled selected>Pilih salah satu provinsi</option>
+                        <option value="Aceh">Aceh</option>
+                        <option value="Sumatera Utara">Sumatera Utara</option>
+                        <option value="Sumatera Barat">Sumatera Barat</option>
+                        <option value="Riau">Riau</option>
+                        <option value="Kepulauan Riau">Kepulauan Riau</option>
+                        <option value="Jambi">Jambi</option>
+                        <option value="Sumatera Selatan">Sumatera Selatan</option>
+                        <option value="Bangka Belitung">Bangka Belitung</option>
+                        <option value="Bengkulu">Bengkulu</option>
+                        <option value="Lampung">Lampung</option>
+                        <option value="Banten">Banten</option>
+                        <option value="DKI Jakarta">DKI Jakarta</option>
+                        <option value="Jawa Barat">Jawa Barat</option>
+                        <option value="Jawa Tengah">Jawa Tengah</option>
+                        <option value="DI Yogyakarta">DI Yogyakarta</option>
+                        <option value="Jawa Timur">Jawa Timur</option>
+                        <option value="Bali">Bali</option>
+                        <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
+                        <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
+                        <option value="Kalimantan Barat">Kalimantan Barat</option>
+                        <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+                        <option value="Kalimantan Tengah">Kalimantan Tengah</option>
+                        <option value="Kalimantan Timur">Kalimantan Timur</option>
+                        <option value="Kalimantan Utara">Kalimantan Utara</option>
+                        <option value="Sulawesi Utara">Sulawesi Utara</option>
+                        <option value="Gorontalo">Gorontalo</option>
+                        <option value="Sulawesi Tengah">Sulawesi Tengah</option>
+                        <option value="Sulawesi Barat">Sulawesi Barat</option>
+                        <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                        <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+                        <option value="Maluku">Maluku</option>
+                        <option value="Maluku Utara">Maluku Utara</option>
+                        <option value="Papua">Papua</option>
+                        <option value="Papua Barat">Papua Barat</option>
+                        <option value="Papua Selatan">Papua Selatan</option>
+                        <option value="Papua Tengah">Papua Tengah</option>
+                        <option value="Papua Pegunungan">Papua Pegunungan</option>
+                        <option value="Papua Barat Daya">Papua Barat Daya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Kota/Kabupaten</label>
+                    <input type="text" id="cityInput" class="form-input" placeholder="Contoh: Malang / Sidoarjo" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Kecamatan</label>
+                    <input type="text" id="districtInput" class="form-input" placeholder="Contoh: Klojen / Karangploso" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Alamat Lengkap (Jalan, Nomor, RT/RW, Patokan)</label>
+                    <textarea id="addressInput" class="form-input" placeholder="Jalan, Nomor rumah/patokan, Blok, RT/RW, Kode Pos" required></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+                <legend class="modal-subtitle">
+                    <i class="fas fa-cash-register"></i> Pembayaran & Catatan
+                </legend>
+                <div class="form-group">
+                    <label class="form-label">Catatan Tambahan (Opsional)</label>
+                    <input type="text" id="notesInput" class="form-input" placeholder="Contoh: Titip ke tetangga, kirim setelah jam 1 siang" />
+                </div>
+                <div class="form-group" style="border: 1px solid #d4edda; background-color: #f0fff0; padding: 10px; border-radius: 5px;">
+                    <label class="form-label" style="font-weight: bold; color: var(--color-success);">Metode Pembayaran</label>
+                    <p><i class="fas fa-truck-loading"></i> Bayar di Tempat (COD)</p>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="btn btn-success btn-lg w-100 mt-3">
+                <i class="fas fa-truck-fast"></i> Konfirmasi Pesanan COD
+            </button>
+        </form>
+    </div>
+</div>
+    
+    <div id="purchaseConfirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex-between mb-2">
+                <h2 class="modal-title"><i class="fas fa-check-circle"></i> Pesanan Diterima!</h2>
+                <span class="close" id="closePurchaseConfirmModalBtn" data-close-modal="purchaseConfirmModal">&times;</span>
+            </div>
+            <p class="mb-2">Terima kasih! Pesanan Anda telah kami terima dan akan segera diproses untuk dikirim. **Siapkan pembayaran saat kurir tiba.**</p>
+            <div id="purchaseSummary" class="border-top pt-2">
+            </div>
+            <button class="btn btn-primary w-100 mt-2" id="closePurchaseConfirmModalBtn2">
+                <i class="fas fa-home"></i> Kembali ke Home
+            </button>
+        </div>
+    </div>
+
+    <div id="orderDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex-between mb-2">
+                <h2 class="modal-title"><i class="fas fa-receipt"></i> Detail Pesanan<span id="detailOrderId"></span></h2>
+                <span class="close" id="closeOrderDetailModalBtn" data-close-modal="orderDetailModal">&times;</span>
+            </div>
+            <div id="orderDetailContent">
+                <p class="text-center muted">Memuat detail pesanan...</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3><i class="fas fa-seedling"></i> Taniku</h3>
+                <p>Solusi lengkap untuk kebutuhan pertanian Anda.</p>
+            </div>
+            <div class="footer-col"><h4>Navigasi</h4><ul><li><a href="#home">Home</a></li><li><a href="#products">Katalog Produk</a></li><li><a href="#consultation">Layanan Konsultasi</a></li><li><a href="#about" onclick="window.showAbout()">Tentang Kami</a></li></ul></div>
+            <div class="footer-col"><h4>Informasi</h4><ul><li><a href="#">Cara Pesan</a></li><li><a href="#">Kebijakan Pengembalian</a></li><li><a href="#">FAQ</a></li><li><a href="#">Blog Tani</a></li></ul></div>
+            <div class="footer-col"><h4>Hubungi Kami</h4><p><i class="fas fa-envelope"></i> support@taniku.com</p><p><i class="fas fa-phone"></i> +62 87856999678</p><p><i class="fas fa-map-marker-alt"></i> Malang, Indonesia</p></div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Taniku. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script type="module" src="js/app.js"></script> 
+</body>
+</html>

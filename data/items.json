@@ -1,0 +1,69 @@
+[
+  {
+    "id": 1,
+    "category": "benih",
+    "name": "Benih Padi Ciherang 5kg",
+    "price": 120000,
+    "description": "Benih unggul padi varietas Ciherang dengan daya tumbuh tinggi.",
+    "image": "https://ketahananpangan.semarangkota.go.id/v3/content/images/Padi.jpg",
+    "originalPrice": 135000,
+    "badge": "PROMO",
+    "updatedAt": "2025-10-02T08:58:20.305Z"
+  },
+  {
+    "id": 2,
+    "category": "bibit",
+    "name": "Bibit Kopi Robusta 20 batang",
+    "price": 400000,
+    "description": "Bibit kopi robusta pilihan siap tanam.",
+    "image": "https://placehold.co/300x200/795548/FFFFFF/png?text=Bibit+Kopi"
+  },
+  {
+    "id": 3,
+    "category": "pupuk",
+    "name": "Pupuk Urea 50kg",
+    "price": 350000,
+    "description": "Pupuk urea kualitas tinggi untuk meningkatkan hasil panen.",
+    "image": "https://placehold.co/300x200/8BC34A/333333/png?text=Pupuk+Urea"
+  },
+  {
+    "id": 4,
+    "category": "pupuk",
+    "name": "Pupuk NPK 25kg",
+    "price": 280000,
+    "description": "Pupuk majemuk untuk pertumbuhan daun, bunga, dan buah.",
+    "image": "https://placehold.co/300x200/CDDC39/333333/png?text=Pupuk+NPK"
+  },
+  {
+    "id": 5,
+    "category": "pestisida",
+    "name": "Insektisida Cair 250ml",
+    "price": 55000,
+    "description": "Obat pengendali hama serangga pada tanaman.",
+    "image": "https://placehold.co/300x200/F44336/FFFFFF/png?text=Insektisida"
+  },
+  {
+    "id": 6,
+    "category": "pestisida",
+    "name": "Fungisida Bubuk 100gr",
+    "price": 35000,
+    "description": "Obat pengendali jamur penyebab penyakit tanaman.",
+    "image": "https://placehold.co/300x200/9C27B0/FFFFFF/png?text=Fungisida"
+  },
+  {
+    "id": 7,
+    "category": "alat",
+    "name": "Cangkul Baja Berkualitas",
+    "price": 80000,
+    "description": "Alat pertanian kokoh untuk segala jenis tanah.",
+    "image": "https://placehold.co/300x200/03A9F4/FFFFFF/png?text=Cangkul"
+  },
+  {
+    "id": 8,
+    "category": "alat",
+    "name": "Sprayer Elektrik 16L",
+    "price": 450000,
+    "description": "Alat penyemprot elektrik untuk pupuk cair dan pestisida.",
+    "image": "https://placehold.co/300x200/009688/FFFFFF/png?text=Sprayer"
+  }
+]

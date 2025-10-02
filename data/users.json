@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "username": "AdminTaniku",
+    "email": "admin@taniku.com",
+    "password": "$2a$10$KSRuadpVyF0M1ACFKHp2ReplCWvX.8c1Ln1W3gmuNFHh71.ANxIz2",
+    "role": "admin",
+    "createdAt": "2025-10-02T08:08:06.053Z"
+  },
+  {
+    "id": 1759392573504,
+    "username": "wira",
+    "email": "wira@gmail.com",
+    "password": "$2a$10$5Q8NaYrhzv131fPtYHaPMeNzU2ZoMpkBavYGB/tE3rh9vxhpOllfu",
+    "role": "user",
+    "createdAt": "2025-10-02T08:09:33.504Z"
+  },
+  {
+    "id": 1759406238962,
+    "username": "oktawir",
+    "email": "okta@gmail.com",
+    "password": "$2a$10$iMnqTgEz08G3f89Tabfo9Oi4UesnmjBaPciuM7he5bBoiEC5D.Soi",
+    "role": "user",
+    "createdAt": "2025-10-02T11:57:18.962Z"
+  }
+]
